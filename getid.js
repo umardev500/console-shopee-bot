@@ -6,7 +6,7 @@ var flashSale;
 var upcomingFlashSale
 
 // Start measuring
-console.time('Exec Time');
+startCheckId = Date.now();
 
 // Get csrf token
 var csrf = document.cookie.split(`; root_csrftoken=`).pop().split(';').shift();
@@ -82,6 +82,8 @@ var pushId = async function () {
 	} catch(err) {
 		console.log(err);
 	}
+
+	console.log(`end ${Date.now() - startCheckId}`);
 }
 
 // Running

@@ -36,6 +36,7 @@ function checkoutInfo() {
                 return res.json();
             })
             .then(function (data) {
+                console.log(data);
                 // console.log(data.shipping_orders[0].fulfillment_info);
                 resolve(data.checkout_price_data);
             })
@@ -47,6 +48,8 @@ function checkoutInfo() {
 
 
 var run = async function () {
+    console.clear();
+    console.log('[status] Checking payment info at');
     try {
         let priceData = await checkoutInfo();
         console.log(priceData);

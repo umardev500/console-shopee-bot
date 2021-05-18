@@ -48,6 +48,7 @@ function checkoutInfo() {
 
 var run = async function () {
     console.clear(); // clear the console
+    console.log('[info] Starting');
     try {
         let data = await checkoutInfo();
         let priceData = data.checkout_price_data;
@@ -76,7 +77,17 @@ var run = async function () {
     console.log(`Co Info Execution time: ${Date.now() - coInfoStart}`);
 };
 
-run();
+// run();
+
+// Running with timeout
+startTime = setInterval(function () {
+    console.log(new Date().getSeconds())
+
+    if ((new Date().getSeconds()) == 59) {
+        run();
+        clearInterval(startTime);
+    }
+}, 100);
 
 
 // Order section
@@ -132,7 +143,7 @@ function asyncOrder(price, payable, fulfillmentInfo, shippingSubtotal, coTimesta
 
 async function order(price, payable, fulfillmentInfo, shippingSubtotal, coTimestamp) {
     let payStart = Date.now();
-    let lastPriceStr = '5.000';
+    let lastPriceStr = '50.000';
     let lastPrice = parseInt(lastPriceStr.replace('.', '') + '00000');
 
     // console.log(lastPrice)
@@ -144,7 +155,7 @@ async function order(price, payable, fulfillmentInfo, shippingSubtotal, coTimest
     // If price less than flash sale price
     // then start ordering else reloading
     if (price < lastPrice) {
-        console.log('[info] Starting order')
+        console.log('[status] Starting order');
         try {
             let result = await asyncOrder(price, payable, fulfillmentInfo, shippingSubtotal, coTimestamp);
             console.log(result);
@@ -154,6 +165,7 @@ async function order(price, payable, fulfillmentInfo, shippingSubtotal, coTimest
             run(); // reload
         }
         console.log(`Pay execution time: ${Date.now() - payStart}`);
+        console.log('[status] Done');
     } else {
         run(); // reload
         console.log('C4: Reloading actions');
