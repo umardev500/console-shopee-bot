@@ -1,5 +1,4 @@
 var fulfillment;
-var coInfoStart = Date.now();
 
 function checkoutInfo() {
     let url = 'https://shopee.co.id/api/v2/checkout/shopee_lite/get';
@@ -47,6 +46,7 @@ function checkoutInfo() {
 
 
 var run = async function () {
+    var coInfoStart = Date.now();
     console.clear(); // clear the console
     console.log('[info] Starting');
     try {
@@ -77,24 +77,8 @@ var run = async function () {
     console.log(`Co Info Execution time: ${Date.now() - coInfoStart}`);
 };
 
-// run();
-
-// Running with timeout
-startTime = setInterval(function () {
-    console.log(new Date().getSeconds())
-
-    if ((new Date().getSeconds()) == 59) {
-        run();
-        clearInterval(startTime);
-    }
-}, 100);
-
-
 // Order section
 function asyncOrder(price, payable, fulfillmentInfo, shippingSubtotal, coTimestamp) {
-
-    // console.log(`time stamp: ${coTimestamp}`);
-    // console.log(`py able: ${payable}`);
 
     let url = 'https://shopee.co.id/api/v2/checkout/shopee_lite/place_order';
     let headers = {
@@ -145,12 +129,6 @@ async function order(price, payable, fulfillmentInfo, shippingSubtotal, coTimest
     let payStart = Date.now();
     let lastPriceStr = '50.000';
     let lastPrice = parseInt(lastPriceStr.replace('.', '') + '00000');
-
-    // console.log(lastPrice)
-    // console.log(price)
-    // console.log(payable)
-    // console.log(fulfillmentInfo)
-    // console.log(shippingSubtotal)
 
     // If price less than flash sale price
     // then start ordering else reloading

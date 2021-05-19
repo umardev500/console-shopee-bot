@@ -54,31 +54,34 @@ function getId() {
 	});
 }
 
+
 var pushId = async function () {
 	console.clear(); // clear the console
 	try {
 		let result = await getId();
-		console.log(result)
-		console.timeEnd('Exec Time');
+		// console.log(result)
 		let item = result.item;
 		let models = item.models;
 
 		// passing data
 		itemid = item.itemid;
 		shopid = item.shopid;
-		modelid = models[0].modelid;
+		selectedModel = models[0];
+		modelid = selectedModel.modelid;
 		name = item.name;
 		flashSale = item.flash_sale;
 		upcomingFlashSale = item.upcoming_flash_sale;
+		let priceTarget = '7.200';
+		let priceTargetFinal = parseInt(priceTarget.replace('.', '') + '00000');
 
-		console.log(item.name);
-		console.log(itemid);
-		console.log(shopid);
-		console.log(modelid);
-		console.log(models.length);
-		console.log(models);
-		console.log(flashSale);
-		console.log(upcomingFlashSale);
+		if (selectedModel.price == priceTargetFinal) {
+			run();
+			console.log('Doing order');
+		} else {
+			console.log('Reloading get id');
+			pushId();
+		}
+
 	} catch(err) {
 		console.log(err);
 	}
@@ -87,4 +90,12 @@ var pushId = async function () {
 }
 
 // Running
-pushId();
+
+startTime = setInterval(function () {
+    console.log(new Date().getSeconds())
+
+    if ((new Date().getSeconds()) == 59) {
+        pushId();
+        clearInterval(startTime);
+    }
+}, 100);
