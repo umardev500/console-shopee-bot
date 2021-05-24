@@ -71,16 +71,6 @@ var pushId = async function () {
 		name = item.name;
 		flashSale = item.flash_sale;
 		upcomingFlashSale = item.upcoming_flash_sale;
-		let priceTarget = '7.200';
-		let priceTargetFinal = parseInt(priceTarget.replace('.', '') + '00000');
-
-		if (selectedModel.price == priceTargetFinal) {
-			run();
-			console.log('Doing order');
-		} else {
-			console.log('Reloading get id');
-			pushId();
-		}
 
 	} catch(err) {
 		console.log(err);
@@ -91,11 +81,11 @@ var pushId = async function () {
 
 // Running
 
-startTime = setInterval(function () {
-    console.log(new Date().getSeconds())
+// startTime = setInterval(function () {
+//     console.log(new Date().getSeconds())
 
-    if ((new Date().getSeconds()) == 59) {
-        pushId();
-        clearInterval(startTime);
-    }
-}, 100);
+//     if ((new Date().getSeconds()) == 59) {
+//         pushId();
+//         clearInterval(startTime);
+//     }
+// }, 100);

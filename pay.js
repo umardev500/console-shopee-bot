@@ -77,6 +77,8 @@ var run = async function () {
     console.log(`Co Info Execution time: ${Date.now() - coInfoStart}`);
 };
 
+run();
+
 // Order section
 function asyncOrder(price, payable, fulfillmentInfo, shippingSubtotal, coTimestamp) {
 
