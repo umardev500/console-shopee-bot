@@ -57,7 +57,7 @@ var run = async function () {
 
         // if is error then reloading action
         if (isError !== undefined) {
-            run(); // reload
+            // run(); // reload
             console.log(`Error type: ${isError}`);
             console.log('C1: Reloading actions');
         } else {
@@ -78,6 +78,15 @@ var run = async function () {
 };
 
 run();
+
+startTime = setInterval(function () {
+    console.log(new Date().getSeconds())
+
+    if ((new Date().getSeconds()) == '00') {
+        pushId();
+        clearInterval(startTime);
+    }
+}, 100);
 
 // Order section
 function asyncOrder(price, payable, fulfillmentInfo, shippingSubtotal, coTimestamp) {
