@@ -80,6 +80,7 @@ var pushId = async function () {
 }
 
 // Running
+pushId();
 
 // startTime = setInterval(function () {
 //     console.log(new Date().getSeconds())
