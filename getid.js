@@ -66,11 +66,14 @@ var pushId = async function () {
 		// passing data
 		itemid = item.itemid;
 		shopid = item.shopid;
-		selectedModel = models[0];
+		selectedModel = models[4];
 		modelid = selectedModel.modelid;
 		name = item.name;
 		flashSale = item.flash_sale;
 		upcomingFlashSale = item.upcoming_flash_sale;
+
+		console.log(models)
+		console.log(upcomingFlashSale)
 
 	} catch(err) {
 		console.log(err);
